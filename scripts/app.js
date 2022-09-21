@@ -68,19 +68,8 @@ function localStorage(){
 
 // let transitionData = myAccounter.getTotalTransactionsInfo();
 
-const showProductBtn = document.querySelector('.accore__show-product-btn');
-const addProductBtn = document.querySelector('.accore__add-product-btn');
-
-const post = {
-    method:'that',
-    smth:'thatway'
-}
-
-showProductBtn.addEventListener('click', function(){
-    console.log('showProductBtn');
-  
-});
-
-addProductBtn.addEventListener('click', function(){
+const recipesList = document.querySelector('.recipes');
+const addRecipeBtn = recipesList.querySelector('.recipes-add-form__btn');
+addRecipeBtn.addEventListener('click', function(){
     console.log('add');
 });

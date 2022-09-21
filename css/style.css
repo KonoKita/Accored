@@ -79,56 +79,60 @@ h1, h2, h3, h4, h5, h6 {
 /*--------------------*/
 /*Variables*/
 /*Variables end*/
+.app__inner {
+  padding: 10px 0;
+  border: 1px #000 solid;
+}
+
 .container {
   max-width: 1200px;
   margin: 0 auto;
   padding: 0 10px;
 }
 
-.app__inner {
-  padding: 10px 0;
-}
-
-.product-btn {
-  color: #000;
-  padding: 10px;
-  background: #ccc;
+.recipes .recipes-list {
   width: -webkit-max-content;
   width: -moz-max-content;
   width: max-content;
-  border-radius: 10px;
   margin: 0 auto;
 }
-
-.accore-product-form-input {
-  background: #fff;
-  border: 1px #ccc solid;
-  border-radius: 10px;
-}
-
-.accore__show-product-inputs-wrapper {
+.recipes .recipes-list__title {
+  font-size: 20px;
+  font-family: robotoRegular, sans-serif;
+  text-align: center;
   margin-bottom: 10px;
 }
-
-.product-btn {
-  margin-bottom: 5px;
-}
-
-.product-btn:last-child {
-  margin-bottom: 0;
-}
-
-.accore__show-product-btns-wrapper {
-  margin-bottom: 10px;
-}
-
-.accore__show-product-input {
-  margin: 0 auto 10px auto;
+.recipes .recipes-add-form__inputs-wrapper {
+  margin: 0 auto 7px;
   width: -webkit-max-content;
   width: -moz-max-content;
   width: max-content;
 }
+.recipes .recipes-add-form__input {
+  border-radius: 3px;
+  border: 1px #ccc solid;
+  padding: 10px;
+}
+.recipes .recipes-add-form__btn {
+  padding: 10px;
+  border: 1px #ccc solid;
+  border-radius: 3px;
+  display: block;
+  background: #ccc;
+  text-align: center;
+  width: -webkit-max-content;
+  width: -moz-max-content;
+  width: max-content;
+  margin: 0 auto;
+  cursor: pointer;
+  height: -webkit-max-content;
+  height: -moz-max-content;
+  height: max-content;
+}
 
-.accore__show-product-input:last-child {
-  margin-bottom: 0;
+.recipe {
+  border-radius: 3px;
+  padding: 10px;
+  margin-bottom: 7px;
+  border: 1px #000 solid;
 }/*# sourceMappingURL=style.css.map */

@@ -24,7 +24,7 @@ class Accore{
     }
 
     public function prepareApp(){
-        include_once 'controllers/db.php';
+        include_once 'objects/db.php';
         $this->addJs('scripts/app.js');
         $this->addCss('css/style.css');
         

@@ -15,22 +15,40 @@
 	<div id="app">
         <div class="container">
             <div class="app__inner">
-                <div class="app__recipes-list">
-                    Рецепты
-                    <?php foreach($recipesList as $name => $recipes){?>
-                        <div class="recipe">
-                            <div class="recipe__number">
-                                <?php echo $name; ?>
+                <section class="recipes">
+                    <div class="recipes-list">
+                        <h3 class="recipes-list__title">Рецепты</h3>
+                        <?php foreach($recipesList as $recipe){
+                            $recipeNumber = $recipe[0];
+                            $recipeName = $recipe[1];
+                            $recipeContent = $recipe[2];
+                            ?>
+                            <div class="recipe">
+                                <div class="recipe__number">
+                                    <?php echo $recipeNumber; ?>
+                                </div>
+                                <div class="recipe__name">
+                                    <?php echo $recipeName; ?>
+                                </div>
+                                <div class="recipe__content">
+                                    <?php echo $recipeContent; ?>
+                                </div>
                             </div>
-                            <div class="recipe__content">
-                                <?php echo $recipes; ?>
-                            </div>
+                        <?php  }; ?>
+                    
+                    </div>
+                    <form class="recipes-add-form">
+                        <div class="recipes-add-form__inputs-wrapper">
+                            <input type="text" class="recipes-add-form__input name">
+                            <input type="text" class="recipes-add-form__input content">
                         </div>
-                    <?php  }; ?>
-                    <button class="app__recipes-add-btn">
-                        Добавить рецепт
-                    </button>
-                </div>
+                        
+
+                        <a class="recipes-add-form__btn">
+                            Добавить рецепт
+                        </a>
+                    </form>
+                </section>
             </div>
         </div>
     </div>
