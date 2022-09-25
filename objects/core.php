@@ -3,6 +3,9 @@ class Accore{
     public $js;
     private $css;
 
+    function __construct(){
+
+    }
     
     function addJs($path){
         $this->js .= '<script src="'.$path.'"></script>';

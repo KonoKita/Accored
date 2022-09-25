@@ -70,6 +70,24 @@ function localStorage(){
 
 const recipesList = document.querySelector('.recipes');
 const addRecipeBtn = recipesList.querySelector('.recipes-add-form__btn');
+
+const addRecipeNameInput = document.querySelector('.recipes-add-form__input.name');
+const addRecipeContentInput = document.querySelector('.recipes-add-form__input.content');
+
 addRecipeBtn.addEventListener('click', function(){
-    console.log('add');
+    let recipeName = addRecipeNameInput.value.trim();
+    let recipeContent = addRecipeContentInput.value.trim();
+
+    console.log(recipeName);
+    console.log(recipeContent);
+    const url = 'controllers/recipes.php/test';
+    let recipe = {
+        recipeName:recipeName,
+        recipeContent:recipeContent
+    };
+    fetch(url, {
+        method: 'POST',
+        body: JSON.stringify(recipe),
+    }).then(response => response.json())
+    .then((data) =>  console.log(data))
 });
