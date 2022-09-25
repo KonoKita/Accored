@@ -1,4 +1,3 @@
-
 <form action="#">
     <label for="name">Название продукта</label>
     <input id="name" type="text">

@@ -1,13 +1,13 @@
 <?php
 //=========index.php=========//
-//Воронка всех запросов, старт приложение происходит отсюда
-
-include_once 'core.php';
+/*
+-Старт происходит отсюда 
+-Воронка всех запросов, через роутер определяет маршрут приложения
+-Инициирует стартовый скрипт start.php
+*/
 include_once 'objects/router.php';
 
-echo $html;
+$router = new Router;
+$currentRoute = $router->getRouteByUrl();
 
-
-
-
-
+include_once 'start.php';

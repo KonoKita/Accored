@@ -18,24 +18,7 @@
                 <section class="recipes">
                     <div class="recipes-list">
                         <h3 class="recipes-list__title">Рецепты</h3>
-                        <?php foreach($recipesList as $recipe){
-                            $recipeNumber = $recipe[0];
-                            $recipeName = $recipe[1];
-                            $recipeContent = $recipe[2];
-                            ?>
-                            <div class="recipe">
-                                <div class="recipe__number">
-                                    <?php echo $recipeNumber; ?>
-                                </div>
-                                <div class="recipe__name">
-                                    <?php echo $recipeName; ?>
-                                </div>
-                                <div class="recipe__content">
-                                    <?php echo $recipeContent; ?>
-                                </div>
-                            </div>
-                        <?php  }; ?>
-                    
+                        <?php echo $recipes; ?>
                     </div>
                     <form class="recipes-add-form">
                         <div class="recipes-add-form__inputs-wrapper">
