@@ -5,6 +5,7 @@
 -Воронка всех запросов, через роутер определяет маршрут приложения
 -Инициирует стартовый скрипт start.php
 */
+
 include_once 'objects/router.php';
 
 $router = new Router;

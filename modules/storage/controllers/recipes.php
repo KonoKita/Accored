@@ -20,6 +20,13 @@ class RecipesController {
         echo json_encode($out);
         // return $data;
     }
+
+    function addNewRecipe(){
+        // $out[] = json_decode(file_get_contents('php://input'));
+        // echo json_encode($out);
+        // $this->db->query();
+        echo 'Создал новый рецепт';
+    }
 }
 
 
