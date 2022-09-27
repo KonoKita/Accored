@@ -32,12 +32,21 @@ class AccoreDB {
     function query($query){
         $fullRes = [];
         $result = mysqli_query($this->connection, $query);
+    }
+
+    function queryReturnAssoc($query){
+        $fullRes = [];
+        $result = mysqli_query($this->connection, $query);
         if($result){
             while($row = $result->fetch_row()){
                 $fullRes[] = $row;
             }
         }
         return $fullRes;
+    }
+    function sqlDef($variable){
+        $protectedVariable = $this->connection->real_escape_string($variable);
+        return $protectedVariable;
     }
 
 }

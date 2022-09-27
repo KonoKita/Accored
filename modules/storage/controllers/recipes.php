@@ -22,10 +22,15 @@ class RecipesController {
     }
 
     function addNewRecipe(){
-        // $out[] = json_decode(file_get_contents('php://input'));
-        // echo json_encode($out);
-        // $this->db->query();
-        echo 'Создал новый рецепт';
+        $out[] = json_decode(file_get_contents('php://input'),true);
+        $recipeName = $out[0]['recipeName'];
+        $recipeContent = $out[0]['recipeContent'];
+        $sqlForAddNewRecipe = 'INSERT INTO `acc_recipes` 
+        (`name`,`recipe`) 
+        VALUES 
+        ("'.$this->db->sqlDef($recipeName).'","'.$this->db->sqlDef($recipeContent).'")';
+        $this->db->query($sqlForAddNewRecipe);
+        return true;
     }
 }
 

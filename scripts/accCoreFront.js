@@ -1,6 +1,6 @@
 'use strict'
 
-let accCoreFront = new class accCoreFront { 
+class accCoreFront { 
     constructor(){
         console.log('asdasd');
     }
@@ -33,9 +33,12 @@ let accCoreFront = new class accCoreFront {
     }
 
     async updateView() {
-        const url = 'storage/getView';
+        const url = 'storage/Accore/getView';
         let recipesList = await fetch(url);
         console.log(recipesList);
+    }
+    print() {
+        console.log('asdas');
     }
 }
 
@@ -61,6 +64,7 @@ let accCoreFront = new class accCoreFront {
 
 //============LOGIC===============//
 // let transitionData = myAccounter.getTotalTransactionsInfo();
+accCoreFront.print();
 const recipesList = document.querySelector('.recipes');
 const addRecipeBtn = recipesList.querySelector('.recipes-add-form__btn');
 
@@ -68,6 +72,7 @@ const addRecipeNameInput = recipesList.querySelector('.recipes-add-form__input.n
 const addRecipeContentInput = recipesList.querySelector('.recipes-add-form__input.content');
 
 addRecipeBtn.addEventListener('click', function(){
+accCoreFront.addNewRecipe();
     const recipeName = addRecipeNameInput.value.trim();
     const recipeContent = addRecipeContentInput.value.trim();
 
@@ -75,7 +80,7 @@ addRecipeBtn.addEventListener('click', function(){
         recipeName:recipeName,
         recipeContent:recipeContent
     };
-
+    console.log(typeof accCoreFront.addNewRecipe);
     accCoreFront.addNewRecipe(recipe)
     .then(accCoreFront.updateView);
 });

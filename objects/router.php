@@ -20,7 +20,7 @@ class Router{
             'object'=> $object,
             'action'=> $action,
         ];
-        echo '<pre>',print_r($routeInfo,1),'<pre>';
+        // echo '<pre>',print_r($routeInfo,1),'<pre>';
         return $routeInfo;
     }
 

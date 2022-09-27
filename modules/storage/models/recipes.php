@@ -9,7 +9,7 @@ class RecipeModel {
     function getAllRecipes(){
         $recipes = [];
         $sqlForRecipes = 'SELECT * FROM `acc_recipes`';
-        $recipes = $this->db->query($sqlForRecipes);
+        $recipes = $this->db->queryReturnAssoc($sqlForRecipes);
         return $recipes;
     }
 }

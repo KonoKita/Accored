@@ -28,6 +28,7 @@ class Accore{
         include_once 'modules/storage/models/recipes.php'; //подключаем модель рецептов
         
         $this->addJs('../../scripts/app.js');
+        $this->addJs('../../scripts/accCoreFront.js');
         $this->addCss('../../css/style.css');
         
     }
@@ -40,11 +41,11 @@ class Accore{
         if(!empty($action)){
             $this->doAction($route);
         }
-        $view = $this->getView($route);
-        return $view;
+        else{
+            $view = $this->getView($route);
+            return $view;
+        }
     }
-
-    
 
     public function getModuleView($templatePath, $data = false){
         ob_start();
