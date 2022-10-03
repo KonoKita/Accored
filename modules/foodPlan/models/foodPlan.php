@@ -1,5 +1,5 @@
 <?php 
-class ShedulesModel {
+class FoodPlanModel {
     private $db;
 
     function __construct($db){
@@ -8,8 +8,11 @@ class ShedulesModel {
 
     function getFullFoodPlan(){
         $foodPlan = [];
-        $sqlForFoodPlan = 'SELECT * FROM `shedule`';
+        $sqlForFoodPlan = 'SELECT * FROM `food_plan`';
         $foodPlanRow = $this->db->queryReturnAssoc($sqlForFoodPlan);
+        if(empty($foodPlan)){
+            return false;
+        }
         foreach($foodPlanRow as $dayPlan){
             $arrMeals = explode(',' , $dayPlan[1]);
             $meals = [
@@ -19,6 +22,7 @@ class ShedulesModel {
             ];
             $foodPlan[$dayPlan[0]] = $meals;
         }
+
         return $foodPlan;
     }
   

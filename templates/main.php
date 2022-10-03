@@ -19,6 +19,6 @@
             </div>
         </div>
     </div>
-<?php echo $data['css']; ?>
+<?php echo $data['js']; ?>
 </body>
 </html>

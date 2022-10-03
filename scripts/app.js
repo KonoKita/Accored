@@ -1,81 +1,52 @@
 'use strict'
-
-let accCoreFront = new class accCoreFront { 
-    constructor(){
-        console.log('asdasd');
-    }
-    showAllProducts(){
-        fetch('controllers/test.php',{
-            method: 'POST',
-            headers: {
-              'Content-Type': 'application/json;charset=utf-8'
-            },
-            body: JSON.stringify(post),
-            action: 'dothebest'
-          })
-        .then((response) => {
-            return response.json();
-        })
-        .then((data) => {
-            console.log(data);
-        });
-    }
-
-    async addNewRecipe(recipe){
-        const url = 'controllers/recipesController/addNewRecipe';
-        const fetchParamethrs = {method: 'POST',body: JSON.stringify(recipe)};
-        let result = await fetch(url, fetchParamethrs);
-        return result;
-    }
-
-    printRecipesTable(recipesList){
-      
-    }
-
-    async updateView() {
-        const url = 'storage/getView';
-        let recipesList = await fetch(url);
-        console.log(recipesList);
-    }
-}
-
-// class localStorage{
-//     localStorage = window.localStorage;
-
-//     saveEntity(key, value){
-//         localStorage.setItem(key, value);
-//     }
-//     saveEntity(key, value){
-//         localStorage.setItem(key, value);
-//     }
-//     clearLocalStorage(){
-//         localStorage.clear();
-//     }
-
-// }
-
-
 //============VARIABLES===============//
+let acc = new accCoreFront;
+const recipesSection = document.querySelector('.recipes');
+const recipesList = document.querySelector('.recipes-list')
+const addRecipeBtn = recipesSection.querySelector('.recipes-add-form__btn');
+
+const addRecipeNameInput = recipesSection.querySelector('.recipes-add-form__input.name');
+const addRecipeContentInput = recipesSection.querySelector('.recipes-add-form__input.content');
+const addRecipeCategorySelect = recipesSection.querySelector('.recipes-add-form__categories');
 
 
+const foodPlanSeciton = document.querySelector('.food-plan');
+const createFoodPlanBtn = foodPlanSeciton.querySelector('.create-food-plan-btn');
 
 //============LOGIC===============//
-// let transitionData = myAccounter.getTotalTransactionsInfo();
-const recipesList = document.querySelector('.recipes');
-const addRecipeBtn = recipesList.querySelector('.recipes-add-form__btn');
-
-const addRecipeNameInput = recipesList.querySelector('.recipes-add-form__input.name');
-const addRecipeContentInput = recipesList.querySelector('.recipes-add-form__input.content');
-
 addRecipeBtn.addEventListener('click', function(){
-    const recipeName = addRecipeNameInput.value.trim();
-    const recipeContent = addRecipeContentInput.value.trim();
+    const mame = addRecipeNameInput.value.trim();
+    const content = addRecipeContentInput.value.trim();
+    let categories = [];
+    let categoryNames = [];
 
+    document.querySelector('.recipes-add-form__categories').querySelectorAll('option').forEach(option=>{
+        if(option.selected){
+            categories.push(option.value);
+            categoryNames.push(option.text);
+        }
+    });
+    const category = categories.join(','); 
+    const categoryName = categoryNames.join(','); 
     const recipe = {
-        recipeName:recipeName,
-        recipeContent:recipeContent
+        name:mame,
+        content:content,
+        category: category,
+        categoryName: categoryName,
     };
-
-    accCoreFront.addNewRecipe(recipe)
-    .then(accCoreFront.updateView);
+    acc.addNewRecipe(recipe)
+    .then(
+        result => {
+            if(result.status === 200){
+                acc.viewNewRecipe(recipe);
+            }
+        }
+    );
 });
+createFoodPlanBtn.addEventListener('click', function(){
+    acc.generateFoodPlan()
+    .then(foodPlan=>{
+        acc.viewFoodPlan(foodPlan);
+    });
+});
+

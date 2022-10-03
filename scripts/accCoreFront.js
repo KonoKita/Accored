@@ -1,8 +1,5 @@
-'use strict'
-
 class accCoreFront { 
     constructor(){
-        console.log('asdasd');
     }
     showAllProducts(){
         fetch('controllers/test.php',{
@@ -22,65 +19,35 @@ class accCoreFront {
     }
 
     async addNewRecipe(recipe){
-        const url = 'controllers/recipesController/addNewRecipe';
+        const url = 'objects/actionCatcher/addNewRecipe';
         const fetchParamethrs = {method: 'POST',body: JSON.stringify(recipe)};
         let result = await fetch(url, fetchParamethrs);
         return result;
     }
 
-    printRecipesTable(recipesList){
-      
+    async generateFoodPlan(){
+        const url = 'objects/actionCatcher/generateFoodPlan';
+        let result = await fetch(url);
+        return result;
     }
 
-    async updateView() {
-        const url = 'storage/Accore/getView';
-        let recipesList = await fetch(url);
-        console.log(recipesList);
+    viewNewRecipe(recipe){
+        let newRecipe = 
+        '<div class="recipe">'+
+        ' <div class="recipe__name">' + recipe.name + '</div>'+
+        ' <div class="recipe__content">' + recipe.content + '</div>'+
+        ' <div class="recipe__category">' + recipe.categoryName + '</div>'+
+        '</div>';
+        recipesList.insertAdjacentHTML('beforeend', newRecipe);
     }
-    print() {
-        console.log('asdas');
+    
+    viewNewRecipe(recipe){
+        let newRecipe = 
+        '<div class="recipe">'+
+        ' <div class="recipe__name">' + recipe.name + '</div>'+
+        ' <div class="recipe__content">' + recipe.content + '</div>'+
+        ' <div class="recipe__category">' + recipe.categoryName + '</div>'+
+        '</div>';
+        recipesList.insertAdjacentHTML('beforeend', newRecipe);
     }
 }
-
-// class localStorage{
-//     localStorage = window.localStorage;
-
-//     saveEntity(key, value){
-//         localStorage.setItem(key, value);
-//     }
-//     saveEntity(key, value){
-//         localStorage.setItem(key, value);
-//     }
-//     clearLocalStorage(){
-//         localStorage.clear();
-//     }
-
-// }
-
-
-//============VARIABLES===============//
-
-
-
-//============LOGIC===============//
-// let transitionData = myAccounter.getTotalTransactionsInfo();
-accCoreFront.print();
-const recipesList = document.querySelector('.recipes');
-const addRecipeBtn = recipesList.querySelector('.recipes-add-form__btn');
-
-const addRecipeNameInput = recipesList.querySelector('.recipes-add-form__input.name');
-const addRecipeContentInput = recipesList.querySelector('.recipes-add-form__input.content');
-
-addRecipeBtn.addEventListener('click', function(){
-accCoreFront.addNewRecipe();
-    const recipeName = addRecipeNameInput.value.trim();
-    const recipeContent = addRecipeContentInput.value.trim();
-
-    const recipe = {
-        recipeName:recipeName,
-        recipeContent:recipeContent
-    };
-    console.log(typeof accCoreFront.addNewRecipe);
-    accCoreFront.addNewRecipe(recipe)
-    .then(accCoreFront.updateView);
-});

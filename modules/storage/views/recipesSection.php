@@ -1,6 +1,6 @@
 <section class="recipes section">
+    <h3 class="recipes-list__title section__title">Рецепты</h3>
     <div class="recipes-list">
-        <h3 class="recipes-list__title section__title">Рецепты</h3>
         <?php print_r($data['recipesListView']); ?>
     </div>
     

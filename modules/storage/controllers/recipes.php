@@ -17,14 +17,13 @@ class RecipesController {
         // $recipeModel = new RecipeModel($this->db);
         // $recipes = $recipeModel->getAllRecipes();
         // return $recipes;
-        $out[] = json_decode(file_get_contents('php://input'));
-        echo json_encode($out);
+   
         // return $data;
     }
 
-    function addNewRecipe(){
+    function addNewRecipe($recipeInfo){
         $recipeModel = new RecipeModel($this->db);
-        $result = $recipeModel->addNewRecipe();
+        $result = $recipeModel->addNewRecipe($recipeInfo);
         if(!$result){
             return false;
         }

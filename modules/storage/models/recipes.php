@@ -8,19 +8,43 @@ class RecipeModel {
 
     function getAllRecipes(){
         $recipes = [];
-        $sqlForRecipes = 'SELECT * FROM `acc_recipes`';
+        $sqlForRecipes = 'SELECT `name` as name, `recipe` as recipe, `category` as category FROM `acc_recipes`';
         $recipes = $this->db->queryReturnAssoc($sqlForRecipes);
+
+        $sqlForAllCategories = 'SELECT * FROM `recipes_categories`';
+        $categoriesRes = $this->db->queryReturnAssoc($sqlForAllCategories);
+        $categories = [];
+
+
+        foreach ($categoriesRes as $category) {
+            $categories[$category[0]] = $category[1];
+        }
+
+        foreach ($recipes as &$recipe) {
+            $recipeCategoriesIds = explode(',',$recipe[2]);
+            $arrRecipeCategories = [];
+
+            foreach ($recipeCategoriesIds as $categoryIndex) {
+                $arrRecipeCategories[] = $categories[$categoryIndex];
+            }
+
+            $recipe[2] = implode(', ',$arrRecipeCategories);
+
+        }
+
+
         return $recipes;
     }
   
-    function addNewRecipe(){
-        $out[] = json_decode(file_get_contents('php://input'),true);
-        $recipeName = $out[0]['recipeName'];
-        $recipeContent = $out[0]['recipeContent'];
+    function addNewRecipe($recipeInfo){
+        $recipeInfo[] = json_decode(file_get_contents('php://input'),true);
+        $recipeName = $recipeInfo['name'];
+        $recipeContent = $recipeInfo['content'];
+        $recipeCategory = $recipeInfo['category'];
         $sqlForAddNewRecipe = 'INSERT INTO `acc_recipes` 
-        (`name`,`recipe`) 
+        (`name`,`recipe`,`category`) 
         VALUES 
-        ("'.$this->db->sqlDef($recipeName).'","'.$this->db->sqlDef($recipeContent).'")';
+        ("'.$this->db->sqlDef($recipeName).'","'.$this->db->sqlDef($recipeContent).'","'.$this->db->sqlDef($recipeCategory).'")';
         $this->db->query($sqlForAddNewRecipe);
         return true;
     }

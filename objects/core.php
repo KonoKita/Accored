@@ -1,7 +1,8 @@
 <?php
 class Accore{
     public $recipesController;
-    public $shedulesController;
+    public $foodPlanController;
+    public $actionCatcher;
     public $js;
     public $css;
     private $db;
@@ -10,7 +11,8 @@ class Accore{
         $this->prepareApp();//подключаем бд js css
         $this->db = new AccoreDB;
         $this->recipesController = new RecipesController($this->db);
-        $this->shedulesController = new shedulesController($this->db);
+        $this->foodPlanController = new foodPlanController($this->db);
+        $this->actionCatcher = new actionCatcher($this->recipesController,$this->foodPlanController);
     }
     
     function addJs($path){
@@ -26,15 +28,14 @@ class Accore{
 
     public function prepareApp(){
         include_once 'objects/db.php';//подключаем бд
+        include_once 'objects/actionCatcher.php';//подключаем бд
         include_once 'modules/storage/controllers/recipes.php'; //подключаем контроллер рецептов
         include_once 'modules/storage/models/recipes.php'; //подключаем модель рецептов
-        include_once 'modules/shedules/controllers/shedules.php'; //подключаем модель рецептов
-        include_once 'modules/shedules/models/shedules.php'; //подключаем модель рецептов
-        
-        $this->addJs('../../scripts/app.js');
-        $this->addJs('../../scripts/accCoreFront.js');
-        $this->addCss('../../css/style.css');
-        
+        include_once 'modules/foodPlan/controllers/foodPlan.php'; //подключаем модель рецептов
+        include_once 'modules/foodPlan/models/foodPlan.php'; //подключаем модель рецептов
+        $this->addJs('scripts/accCoreFront.js');
+        $this->addJs('scripts/app.js');
+        $this->addCss('css/style.css');
     }
 
     //если было действие выполняет его и выводит верстку
@@ -54,6 +55,7 @@ class Accore{
     
 
     public function getView($route){
+        $content = '';
         $content = $this->getModulesView();
         $data = [
             'css' => $this->css,
@@ -89,22 +91,22 @@ class Accore{
         
         $totalModulesView .= $recipesSection;
 
-        //shedules
+        //foodPlan
         $foodPlan = $this->getFoodPlan();
 
         $data = [
             'foodPlan' => $foodPlan,
         ];
 
-        $monthShedule = $this->getTemplateView('modules/shedules/views/monthShedule.php',$data);
+        $monthFoodPlan = $this->getTemplateView('modules/foodPlan/views/monthFoodPlan.php',$data);
 
         $data = [
-            'monthShedule' => $monthShedule,
+            'monthFoodPlan' => $monthFoodPlan,
         ];
 
-        $shedulesSection = $this->getTemplateView('modules/shedules/views/shedulesSection.php',$data);
+        $foodPlanSection = $this->getTemplateView('modules/foodPlan/views/foodPlanSection.php',$data);
 
-        $totalModulesView .= $shedulesSection;
+        $totalModulesView .= $foodPlanSection;
 
        return $totalModulesView;
     }
@@ -118,8 +120,10 @@ class Accore{
     }
 
     public function getFoodPlan(){
-        $foodPlan = $this->shedulesController->getFullFoodPlan();
-
+        $foodPlan = $this->foodPlanController->getFullFoodPlan();
+        if(!$foodPlan){
+            return false;
+        }
         foreach($foodPlan as &$dayPlan){
             $dayPlan['breakfast'] = $this->recipesController->getRecipeInfoById($dayPlan['breakfast']);
             $dayPlan['lunch'] = $this->recipesController->getRecipeInfoById($dayPlan['lunch']);

@@ -1,5 +1,5 @@
 <?php 
-class ShedulesController {
+class FoodPlanController {
     private $db;
 
     function __construct($db){
@@ -7,9 +7,8 @@ class ShedulesController {
     }
 
     function getFullFoodPlan(){
-        $sheduleModel = new ShedulesModel($this->db);
-        $foodPlan = $sheduleModel->getFullFoodPlan();
-
+        $foodPlanModel = new FoodPlanModel($this->db);
+        $foodPlan = $foodPlanModel->getFullFoodPlan();
         return $foodPlan;
     }
     
