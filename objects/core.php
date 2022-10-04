@@ -11,7 +11,7 @@ class Accore{
         $this->prepareApp();//подключаем бд js css
         $this->db = new AccoreDB;
         $this->recipesController = new RecipesController($this->db);
-        $this->foodPlanController = new foodPlanController($this->db);
+        $this->foodPlanController = new foodPlanController($this->db, $this->recipesController);
         $this->actionCatcher = new actionCatcher($this->recipesController,$this->foodPlanController);
     }
     
@@ -120,15 +120,7 @@ class Accore{
     }
 
     public function getFoodPlan(){
-        $foodPlan = $this->foodPlanController->getFullFoodPlan();
-        if(!$foodPlan){
-            return false;
-        }
-        foreach($foodPlan as &$dayPlan){
-            $dayPlan['breakfast'] = $this->recipesController->getRecipeInfoById($dayPlan['breakfast']);
-            $dayPlan['lunch'] = $this->recipesController->getRecipeInfoById($dayPlan['lunch']);
-            $dayPlan['dinner'] = $this->recipesController->getRecipeInfoById($dayPlan['dinner']);
-        }
+        $foodPlan = $this->foodPlanController->getFoodPlan();
         return $foodPlan;
     }
 }

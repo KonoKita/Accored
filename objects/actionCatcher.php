@@ -8,7 +8,7 @@ class ActionCatcher{
 
     function __construct($recipesController, $foodPlanController){
         $this->recipesController = $recipesController;
-        $this->foodPlanController =  $foodPlanController;
+        $this->foodPlanController = $foodPlanController;
     }
     
     function addNewRecipe(){
@@ -31,6 +31,8 @@ class ActionCatcher{
     function generateFoodPlan(){
         $foodPlan = $this->foodPlanController->generateFoodPlan();
     }
+
+   
     
 }
     
