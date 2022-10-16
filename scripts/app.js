@@ -18,21 +18,21 @@ addRecipeBtn.addEventListener('click', function(){
     const mame = addRecipeNameInput.value.trim();
     const content = addRecipeContentInput.value.trim();
     let categories = [];
-    let categoryNames = [];
+    let mealTypeNames = [];
 
     document.querySelector('.recipes-add-form__categories').querySelectorAll('option').forEach(option=>{
         if(option.selected){
             categories.push(option.value);
-            categoryNames.push(option.text);
+            mealTypeNames.push(option.text);
         }
     });
     const category = categories.join(','); 
-    const categoryName = categoryNames.join(','); 
+    const mealTypeName = mealTypeNames.join(','); 
     const recipe = {
         name:mame,
         content:content,
         category: category,
-        categoryName: categoryName,
+        mealTypeName: mealTypeName,
     };
     acc.addNewRecipe(recipe)
     .then(

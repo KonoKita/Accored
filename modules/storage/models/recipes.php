@@ -8,31 +8,8 @@ class RecipeModel {
 
     function getAllRecipes(){
         $recipes = [];
-        $sqlForRecipes = 'SELECT `name` as name, `recipe` as recipe, `category` as category FROM `acc_recipes`';
+        $sqlForRecipes = 'SELECT `id` as id, `name` as name, `recipe` as recipe, `category` as category FROM `acc_recipes`';
         $recipes = $this->db->queryReturnAssoc($sqlForRecipes);
-
-        $sqlForAllCategories = 'SELECT * FROM `recipes_categories`';
-        $categoriesRes = $this->db->queryReturnAssoc($sqlForAllCategories);
-        $categories = [];
-
-
-        foreach ($categoriesRes as $category) {
-            $categories[$category[0]] = $category[1];
-        }
-
-        foreach ($recipes as &$recipe) {
-            $recipeCategoriesIds = explode(',',$recipe[2]);
-            $arrRecipeCategories = [];
-
-            foreach ($recipeCategoriesIds as $categoryIndex) {
-                $arrRecipeCategories[] = $categories[$categoryIndex];
-            }
-
-            $recipe[2] = implode(', ',$arrRecipeCategories);
-
-        }
-
-
         return $recipes;
     }
   

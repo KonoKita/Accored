@@ -12,9 +12,10 @@
 
 </head>
 <body>
-	<div id="app">
+	<div class="app" id="app">
         <div class="container">
             <div class="app__inner">
+                <div class="app__name">Accored</div>
                 <?php echo $data['content']; ?>
             </div>
         </div>

@@ -30,6 +30,7 @@ class ActionCatcher{
 
     function generateFoodPlan(){
         $foodPlan = $this->foodPlanController->generateFoodPlan();
+        print_r($foodPlan);
     }
 
    

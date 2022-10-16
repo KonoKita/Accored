@@ -1,0 +1,12 @@
+@font-face {
+    font-family: 'AC Line';
+    src: url('ACLine.eot');
+    src: local('AC Line'), local('ACLine'),
+        url('ACLine.eot?#iefix') format('embedded-opentype'),
+        url('ACLine.woff2') format('woff2'),
+        url('ACLine.woff') format('woff'),
+        url('ACLine.ttf') format('truetype');
+    font-weight: normal;
+    font-style: normal;
+}
+

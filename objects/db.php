@@ -32,6 +32,7 @@ class AccoreDB {
     function query($query){
         $fullRes = [];
         $result = mysqli_query($this->connection, $query);
+        return $result;
     }
 
     function queryReturnAssoc($query){

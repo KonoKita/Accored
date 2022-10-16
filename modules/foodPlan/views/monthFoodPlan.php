@@ -1,7 +1,6 @@
 <div class="month">
 
 <?php 
-
 if($data['foodPlan'] === false){
     ?>
     <a href = "javascript:void(0);" class="create-food-plan-btn button">Создать план питания</a>

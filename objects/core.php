@@ -1,6 +1,7 @@
 <?php
 class Accore{
     public $recipesController;
+    public $MealCategoriesController;
     public $foodPlanController;
     public $actionCatcher;
     public $js;
@@ -11,7 +12,8 @@ class Accore{
         $this->prepareApp();//подключаем бд js css
         $this->db = new AccoreDB;
         $this->recipesController = new RecipesController($this->db);
-        $this->foodPlanController = new foodPlanController($this->db, $this->recipesController);
+        $this->MealCategoriesController = new MealCategoriesController($this->db);
+        $this->foodPlanController = new FoodPlanController($this->db, $this->recipesController);
         $this->actionCatcher = new actionCatcher($this->recipesController,$this->foodPlanController);
     }
     
@@ -28,11 +30,18 @@ class Accore{
 
     public function prepareApp(){
         include_once 'objects/db.php';//подключаем бд
+
         include_once 'objects/actionCatcher.php';//подключаем бд
+
         include_once 'modules/storage/controllers/recipes.php'; //подключаем контроллер рецептов
         include_once 'modules/storage/models/recipes.php'; //подключаем модель рецептов
+
+        include_once 'modules/storage/models/category.php'; //подключаем модель рецептов
+        include_once 'modules/storage/controllers/mealCategory.php'; //подключаем модель рецептов
+
         include_once 'modules/foodPlan/controllers/foodPlan.php'; //подключаем модель рецептов
         include_once 'modules/foodPlan/models/foodPlan.php'; //подключаем модель рецептов
+
         $this->addJs('scripts/accCoreFront.js');
         $this->addJs('scripts/app.js');
         $this->addCss('css/style.css');
@@ -75,11 +84,16 @@ class Accore{
     public function getModulesView(){
         $totalModulesView = '';
         //recipes
-        $recipesList = $this->recipesController->getAllRecipes();
+        $recipes = $this->recipesController->getRecipesSortByMealType();
 
-        $data['recipesList'] = $recipesList;
+        $categories = $this->MealCategoriesController->getAllCategories();
 
-        $recipesListView = $this->getTemplateView('modules/storage/views/recipesListView.php', $data);
+        $data = [
+            'recipes' => $recipes,
+            'categories' => $categories,
+        ];
+
+        $recipesListView = $this->getTemplateView('modules/storage/views/recipes.php', $data);
         $recipeCreateForm = $this->getTemplateView('modules/storage/views/recipeCreateForm.php');
 
         $data = [
@@ -110,6 +124,8 @@ class Accore{
 
        return $totalModulesView;
     }
+
+
 
     public function getTemplateView($templatePath, $data = false){
         ob_start();

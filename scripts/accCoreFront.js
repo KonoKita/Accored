@@ -36,7 +36,7 @@ class accCoreFront {
         '<div class="recipe">'+
         ' <div class="recipe__name">' + recipe.name + '</div>'+
         ' <div class="recipe__content">' + recipe.content + '</div>'+
-        ' <div class="recipe__category">' + recipe.categoryName + '</div>'+
+        ' <div class="recipe__category">' + recipe.mealTypeName + '</div>'+
         '</div>';
         recipesList.insertAdjacentHTML('beforeend', newRecipe);
     }
@@ -46,7 +46,7 @@ class accCoreFront {
         '<div class="recipe">'+
         ' <div class="recipe__name">' + recipe.name + '</div>'+
         ' <div class="recipe__content">' + recipe.content + '</div>'+
-        ' <div class="recipe__category">' + recipe.categoryName + '</div>'+
+        ' <div class="recipe__category">' + recipe.mealTypeName + '</div>'+
         '</div>';
         recipesList.insertAdjacentHTML('beforeend', newRecipe);
     }

@@ -7,32 +7,31 @@ class FoodPlanModel {
     }
 
     function getFoodPlan(){
-        $sqlForFoodPlan = 'SELECT * FROM `food_plan`';
+        $sqlForFoodPlan = 'SELECT `date` as date, `meal_plan` as meal_plan FROM `food_plan`';
         $foodPlanRow = $this->db->queryReturnAssoc($sqlForFoodPlan);
+
+
         if(empty($foodPlanRow)){
             return false;
         }
 
         foreach($foodPlanRow as $dayPlan){
-            $arrMeals = explode(',' , $dayPlan[1]);
-            $meals = [
-                'breakfast' => $arrMeals[0],
-                'lunch' => $arrMeals[1],
-                'dinner' => $arrMeals[2],
-            ];
-            $foodPlan = [
-                $dayPlan[0] => $meals
-            ];
+            $foodPlan[$dayPlan[0]] = json_decode($dayPlan[1], true);
         }
 
         return $foodPlan;
     }
-    function generateFoodPlan(){
-        $foodPlan = true;
-      
+
+    function saveFoodPlan($foodPlan){
+
+        foreach ($foodPlan as $date => $plan) {
+            $planJSON = json_encode($plan, JSON_UNESCAPED_UNICODE);
+            $sqlForSaveFoodPlan = 'INSERT INTO `food_plan`(`date`, `meal_plan`) VALUES ("'.$this->db->sqlDef($date).'",\''.$planJSON.'\')';
+            $result = $this->db->query($sqlForSaveFoodPlan);
+        }
+
         return $foodPlan;
     }
-    
     
 }
 

@@ -81,9 +81,36 @@ h1, h2, h3, h4, h5, h6 {
   padding: 0;
 }
 
-/*--------------------*/
+/*Scrollbar*/
+body::-webkit-scrollbar {
+  width: 12px; /* ширина всей полосы прокрутки */
+}
+
+body::-webkit-scrollbar-track {
+  background: #101010; /* цвет зоны отслеживания */
+}
+
+body::-webkit-scrollbar-thumb {
+  background-color: #D70147; /* цвет бегунка */
+  border-radius: 20px; /* округлось бегунка */
+  border: 3px solid #101010; /* отступ вокруг бегунка */
+}
+
 /*Variables*/
 /*Variables end*/
+.app {
+  background: #101010;
+  color: #fff;
+}
+.app__name {
+  color: #D70147;
+  font-family: "AC Line", sans-serif;
+  font-size: 40px;
+  letter-spacing: 3px;
+  font-weight: bold;
+  text-align: center;
+  margin-bottom: 10px;
+}
 .app__inner {
   padding: 10px 0;
   font-family: robotoRegular, sans-serif;
@@ -100,16 +127,42 @@ h1, h2, h3, h4, h5, h6 {
   margin: 0 auto 10px auto;
   max-height: 230px;
   overflow-x: hidden;
+  background: #282828;
+  padding: 10px;
+  border-radius: 7px;
+}
+.recipes .recipes-list::-webkit-scrollbar { /* ширина всей полосы прокрутки */
+  width: 12px;
+}
+.recipes .recipes-list::-webkit-scrollbar-thumb {
+  background-color: #101010; /* цвет бегунка */
+  border-radius: 20px; /* округлось бегунка */
+  border: 3px solid #282828; /* отступ вокруг бегунка */
+}
+.recipes .recipes-list::-webkit-scrollbar-track { /* цвет зоны отслеживания */
+  background: #282828;
+  border-radius: 0 7px 7px 0;
+}
+.recipes .recipes-add-form {
+  width: -webkit-max-content;
+  width: -moz-max-content;
+  width: max-content;
+  position: absolute;
+  bottom: -13px;
+  right: 40px;
+  padding: 10px;
+  background: #101010;
+  border-radius: 7px;
 }
 .recipes .recipes-add-form__inputs-wrapper {
   margin: 0 auto 7px;
   width: -webkit-max-content;
   width: -moz-max-content;
   width: max-content;
+  display: none;
 }
 .recipes .recipes-add-form__input {
   border-radius: 3px;
-  border: 1px #ccc solid;
   padding: 10px;
   width: 100%;
   max-width: 300px;
@@ -118,7 +171,6 @@ h1, h2, h3, h4, h5, h6 {
 }
 .recipes .recipes-add-form__categories {
   border-radius: 3px;
-  border: 1px #ccc solid;
   padding: 10px;
   margin: 0 auto;
 }
@@ -131,11 +183,18 @@ h1, h2, h3, h4, h5, h6 {
 }
 
 .recipe {
-  border-radius: 3px;
+  border-radius: 5px;
   padding: 10px;
-  margin-bottom: 7px;
-  border: 1px #000 solid;
   width: 100%;
+  font-family: robotoRegular, sans-serif;
+  background: #101010;
+  margin: 0 10px 10px 0;
+  max-width: 300px;
+  height: -webkit-max-content;
+  height: -moz-max-content;
+  height: max-content;
+  min-height: 140px;
+  overflow: hidden;
 }
 .recipe__name {
   margin-bottom: 10px;
@@ -144,22 +203,31 @@ h1, h2, h3, h4, h5, h6 {
 .recipe__content {
   margin-bottom: 10px;
 }
-.recipe__category {
+.recipe__meal-type {
   line-height: 19px;
 }
 
 .month {
   display: flex;
   flex-wrap: wrap;
+  justify-content: center;
 }
 .month .day {
-  border-radius: 5px;
-  border: 1px #000 solid;
+  font-family: robotoRegular, sans-serif;
+  border-radius: 7px;
   width: -webkit-max-content;
   width: -moz-max-content;
   width: max-content;
   padding: 15px;
   margin: 0 10px 10px 0;
+  max-width: 210px;
+  background: #282828;
+  width: 100%;
+}
+.month .day__date {
+  margin-bottom: 10px;
+  font-weight: bold;
+  text-align: center;
 }
 
 .meal {
@@ -169,14 +237,17 @@ h1, h2, h3, h4, h5, h6 {
 .section {
   padding: 10px;
   margin-bottom: 20px;
-  border: 1px #000 solid;
   border-radius: 5px;
+  position: relative;
 }
 .section__title {
-  font-size: 20px;
-  font-family: robotoRegular, sans-serif;
+  color: #c7c7c7;
   text-align: center;
   margin-bottom: 10px;
+  font-size: 25px;
+  font-weight: 700;
+  letter-spacing: 2px;
+  font-family: "AC Line", sans-serif;
 }
 
 .meal__label {
@@ -185,10 +256,9 @@ h1, h2, h3, h4, h5, h6 {
 
 .button {
   padding: 10px;
-  border: 1px #ccc solid;
   border-radius: 3px;
   display: block;
-  background: #ccc;
+  background: #D70147;
   text-align: center;
   width: -webkit-max-content;
   width: -moz-max-content;
@@ -198,10 +268,38 @@ h1, h2, h3, h4, h5, h6 {
   height: -webkit-max-content;
   height: -moz-max-content;
   height: max-content;
+  color: #fff;
+  font-size: 17px;
+  text-transform: uppercase;
 }
 
-.day__date {
+.recipemeal-type {
   margin-bottom: 10px;
-  font-weight: bold;
-  text-align: center;
+}
+.recipemeal-type__name {
+  margin-bottom: 10px;
+  text-transform: capitalize;
+  font-size: 20px;
+}
+
+.recipe-meal-type__name {
+  font-family: "AC Line", sans-serif;
+  font-size: 20px;
+  letter-spacing: 2px;
+  font-weight: 700;
+  margin-bottom: 10px;
+}
+.recipe-meal-type__recipes {
+  display: flex;
+}
+
+.plus {
+  display: block;
+  width: 50px;
+  height: 50px;
+  background: linear-gradient(#fff, #fff), linear-gradient(#fff, #fff), #D70147;
+  background-position: center;
+  background-size: 50% 2px, 2px 50%;
+  background-repeat: no-repeat;
+  margin: 0;
 }/*# sourceMappingURL=style.css.map */
